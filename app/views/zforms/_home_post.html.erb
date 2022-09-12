@@ -1,0 +1,33 @@
+
+
+<% @posts.each do |post| %>
+
+<div class="jumbotron text-center">
+
+  <!-- Title -->
+  <h2 class="card-title h2"><%= link_to post.title, post_comments_path(post) %></h2>
+  
+  <!-- Grid row -->
+  <div class="row d-flex justify-content-center">
+
+    <!-- Grid column -->
+    <div class="col-xl-7 pb-2">
+
+      <p class="card-text"><%= post.content %></p>
+
+    </div>
+    <!-- Grid column -->
+
+  </div>
+  <!-- Grid row -->
+
+  <hr class="my-4">
+
+    <div class="pt-2">
+        <button type="button" class="btn btn-blue waves-effect"><%= link_to 'EDIT', edit_post_path(post)%> <span class="far fa-gem ml-1"></span></button>
+        <button type="button" class="btn btn-outline-primary waves-effect"><%= link_to 'DELETE', post_path(post), method: :delete%><i class="fas fa-download ml-1"></i></button>
+    </div>
+    <br><br>
+
+  <% end %>
+</div>

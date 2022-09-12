@@ -1,0 +1,26 @@
+
+
+<h1> DISCUSSIONS LISTING PAGE : </h1>
+<%= render 'zforms/home_post' %>
+
+<br><br>
+
+
+<div class='container' >
+<div class="row">
+    <div class="column" >
+        <h1>&ensp;<%= link_to 'CHANNELS :', channels_path %></h1>
+    </div>
+</div>
+
+<div>
+    <ul>
+        <% @channels.each do |channel| %>
+            <li>
+                <%= link_to channel.channel_name,channel_path(channel)  %>
+            </li>
+        <% end %>
+    <ul>            
+</table>
+</div>
+</div>

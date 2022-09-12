@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
+
+    <a class="navbar-brand" href="#">DAX-FORUM</a>
+
+    <li class="navbar-brand" aria-current="page">   
+        <%= link_to 'HOME', posts_path, class:"nav-link text-light" %>
+    </li>
+
+    <% if user_session %>
+        <button class="btn btn-success ml-auto mr-1">
+            <%= link_to 'ADD NEW POST',new_post_path, class:"nav-link text-light" %>
+        </button>
+    <% end %>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+        <ul class="navbar-nav text-right">
+
+            <li class="nav-item active">
+            <% if not user_session %>
+                <li class="nav-item active">
+                    <%= link_to 'SIGN IN', user_session_path, class:"nav-link" %>
+                </li>
+
+                <li class="nav-item active">
+                    <%= link_to 'SIGN UP', new_user_registration_path, class:"nav-link" %>
+                </li>
+
+            <% else %>
+                <li class="nav-item" aria-current="page">   
+                    <%= link_to 'SIGN OUT', destroy_user_session_path, method: :delete, class:"nav-link" %>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+</nav>
