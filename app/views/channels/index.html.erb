@@ -3,8 +3,12 @@
 <h1> CHANNELS LISTING PAGE : </h1>
 
 <br>
-<%= render 'zforms/channels_listing' %>
+<%= render 'channels_listing' %>
 
 <br><br>
 
-<h3><button> <%= link_to 'ADD NEW CHANNEL', new_channel_path %> </button> </h3>
+<div class="container my-3 bg-light">
+    <div class="col-md-12 text-center">
+        <button type="button" class="btn btn-success btn-lg"> <%= link_to 'ADD NEW CHANNEL', new_channel_path, class: "text-light" %> </button>
+    </div>
+</div>
