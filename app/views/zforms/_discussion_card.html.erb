@@ -1,29 +1,107 @@
-<div class="container-fluid mt-100">
-     <div class="row">
-         <div class="col-md-12">
-             <div class="card mb-4">
-                 <div class="card-header">
-                     <div class="media flex-wrap w-100 align-items-center"> <img src="https://i.imgur.com/iNmBizf.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                         <div class="media-body ml-3">USERNAME -><%= @post.user_id %>
-                             <div class="text-muted small">DATE ON WHICH POST IS POSTED</div>
-                         </div>
-                         <div class="text-muted small ml-3">
-                             <div>Member since <strong>DATE AT USER CREATED</strong></div>
-                             <div><strong>NO OF POSTS</strong> number </div>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card-body">
-                    <%= @post.content %>
-                 </div>
-                 <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
-                    <div class="px-4 pt-3"> <a href="javascript:void(0)" class="text-muted d-inline-flex align-items-center align-middle" data-abc="true"> <i class="fa fa-heart text-danger"></i>&nbsp; <span class="align-middle">NO OF COMMENTS</span> </a> <span class="text-muted d-inline-flex align-items-center align-middle ml-4"> <i class="fa fa-eye text-muted fsize-3"></i>&nbsp; <span class="align-middle"></span> </span> </div>
-                    <div class="px-4 pt-3">
-                        <button type="button" class="btn btn-dark">
-                            <i class="ion ion-md-create"></i>&nbsp;<%= link_to 'REPLY', new_post_comment_path %></button> 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog Post - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    </head>
+    <body>
+
+        <!-- Page content-->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Post content-->
+                    <article>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                            <h1 class="fw-bolder mb-1"><%= @post.title %></h1>
+                            <!-- Post meta content-->
+                            <div class="text-muted fst-italic mb-2">Posted on <%= @post.created_at %> by <%= @post.user.username %></div>
+                            <!-- Post categories-->
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
+                    
+                        </header>
+     
+                        <!-- Post content-->
+                        <section class="mb-5">
+                            <p class="fs-5 mb-4"><%= @post.content %></p>
+                        </section>
+                    </article>
+
+                    <!-- Comments section-->
+                    <section class="mb-5">
+                        <div class="card bg-light">
+                            <div class="card-body">
+
+                                <!-- Comment form-->
+                                <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
+                                <button type="button" class="btn btn-dark">
+                                    <%= link_to 'REPLY', new_post_comment_path %>
+                                </button><br><br>
+                                
+                                <% @comments.each do |comment| %>
+                                <div class="d-flex mb-4">
+                                    <div class="ms-3">
+                                        <h4><%= comment.user.username %></h4>
+                                        <%= comment.reply %>
+                                        <%= link_to 'Edit', edit_post_comment_path(@post, comment), class: "btn btn-small" %> 
+                                        <%= link_to 'Delete', post_comment_path(@post, comment), method: :delete, class: "btn btn-small"%> 
+                                    </div>
+                                </div>
+                                <% end %>
+
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+                <!-- Side widgets-->
+                <div class="col-lg-4">
+                    <!-- Search widget-->
+                    <div class="card mb-4">
+                        <div class="card-header">Search</div>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                            </div>
+                        </div>
                     </div>
-                 </div>
-             </div>
-         </div>
-     </div>
- </div>
+
+                    <!-- Categories widget-->
+                    <div class="card mb-4">
+                        <div class="card-header">Channels</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <ul class="list-unstyled mb-0">
+                                    <% @channels.each do |channel| %>
+                                        <li><%= link_to channel.channel_name, channel_path(channel) %>
+                                    <% end %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
